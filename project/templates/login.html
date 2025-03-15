@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+{% block body %}
+<div class="container mt-auto">
+    <form method ="post" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="card-header">
+                <h3 class="text-center">Login</h3>
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class='form-control-label') }}
+                {{ form.email(class='form-control form-control-lg') }}
+                {% if form.email.errors %}
+                {% for error in form.email.errors%}
+                    <span class="text-danger d-block">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class='form-control-label') }}
+                {{ form.password(class='form-control form-control-lg') }}
+                {% if form.password.errors %}
+                {% for error in form.password.errors%}
+                    <span class="text-danger d-block">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+            </div> 
+            
+            <div class="form-check">
+                {{ form.remember.label(class='form-control-label') }}
+                {{ form.remember(class='form-check-input') }}
+            </div>
+            <div class="form-group">
+                {{form.submit(class='btn btn-dark')}} 
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
+
+
+
