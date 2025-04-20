@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="container">
-    <h1>Home</h1>
+<div class="container mt-5">
+    <h1>Welcome to the E-Learning Platform</h1>
+    {% if current_user.is_authenticated %}
+        <p>Hello, {{ current_user.Username }}! View your account details on your <a href="{{ url_for('profile') }}">Profile</a> page.</p>
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">log in</a> or <a href="{{ url_for('register') }}">sign up</a> to access your profile and explore our courses.</p>
+    {% endif %}
 </div>
 {% endblock %}

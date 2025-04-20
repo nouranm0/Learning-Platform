@@ -16,24 +16,23 @@ header h1 {
     margin: 0;
     font-size: 2rem;
 }
-
 footer {
-    background-color:black;
+    background-color: black;
     color: white;
     text-align: center;
     padding: 1rem;
     margin-top: auto;
 }
-
 .bg-purple {
     background-color: palevioletred;
 }
-
 .navbar, .navbar a, .navbar .nav-link, .navbar-brand {
-    color: white ;
+    color: white;
 }
 .navbar .nav-link:hover, .navbar .nav-link.active {
-    color: lightgray ;
+    color: lightgray;
 }
-
-
+.alert {
+    margin: 1rem auto;
+    max-width: 1200px;
+}
