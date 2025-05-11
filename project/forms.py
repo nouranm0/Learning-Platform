@@ -1,30 +1,56 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField ,SubmitField,BooleanField
-from wtforms.validators import DataRequired,length,Email,Regexp,EqualTo
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp
 
 class RegistrationForm(FlaskForm):
-    fname = StringField('first name',validators=[DataRequired(),length(min=2,max=25)])
-    lname = StringField('last name',validators=[DataRequired(),length(min=2,max=25)])
-    username = StringField('username',validators=[DataRequired(),length(min=2,max=25)])
-    email = StringField('email',validators=[DataRequired(),Email()])
-    password = PasswordField('password' , validators=[DataRequired(),Regexp(r"^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$]).{6,12}$",
-               message="Password must be 6-12 characters, with at least one uppercase, one lowercase, one number, and one special character (@, #, $).")
-    ])
-    confirm_password = PasswordField('confirm password' , validators=[DataRequired(),EqualTo('password')])
-    submit = SubmitField("sign up")
+    fname = StringField(
+        "First Name", validators=[DataRequired(), Length(min=2, max=25)]
+    )
+    lname = StringField("Last Name", validators=[DataRequired(), Length(min=2, max=25)])
+    username = StringField(
+        "Username", validators=[DataRequired(), Length(min=2, max=25)]
+    )
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    role = SelectField('Register As', choices=[('Student', 'Student'), ('Instructor', 'Instructor')], validators=[DataRequired()])
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired(),
+            Regexp(
+               r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#_])[A-Za-z\d@$!%*?&#_]{8,32}$"
+            ),
+        ],
+    )
+    confirm_password = PasswordField(
+        "Confirm Password", validators=[DataRequired(), EqualTo("password")]
+    )
+    submit = SubmitField("Sign Up")
 
 class loginForm(FlaskForm):
-    email = StringField('email',validators=[DataRequired(),Email()])
-    password = PasswordField('password' , validators=[DataRequired(),Regexp(r"^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$]).{6,12}$",
-               message="Password must be 6-12 characters, with at least one uppercase, one lowercase, one number, and one special character (@, #, $).")
-    ])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField("Remember Me?")
-    submit = SubmitField("login")
-
+    submit = SubmitField("Login")
 
 class contactForm(FlaskForm):
-    name = StringField('name',validators=[DataRequired(),length(min=2,max=25)])
-    email = StringField('email',validators=[DataRequired(),Email()])
-    message = StringField('How can we help you? ',validators=[DataRequired(),length(min=5)])
-    submit = SubmitField("send message")
+    name = StringField('Name', validators=[DataRequired(), Length(min=2, max=25)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    message = TextAreaField('How can we help you?', validators=[DataRequired(), Length(min=5)])
+    submit = SubmitField("Send Message")
 
+class CourseForm(FlaskForm):
+    title = StringField('Course Title', validators=[DataRequired()])
+    description = TextAreaField('Course Description', validators=[DataRequired()])
+    category = SelectField('Category', choices=[
+        ('Programming', 'Programming'), 
+        ('Design', 'Design'), 
+        ('Marketing', 'Marketing')
+    ], validators=[DataRequired()])
+    price = StringField('Price', validators=[DataRequired()])
+    submit = SubmitField('Add Course')
+
+class DeleteForm(FlaskForm):
+    pass    
+
+class EnrollmentForm(FlaskForm):
+    submit = SubmitField('Confirm Enrollment')

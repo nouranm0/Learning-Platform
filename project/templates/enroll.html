@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>تسجيل في كورس: {{ course.Title }}</h2>
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>تفاصيل الكورس:</h4>
+                    <p>{{ course.Description }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>المدرس:</strong> {{ course.instructor.Username }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>التصنيف:</strong> {{ course.category.Name }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>السعر:</strong> {{ course.Price }} دولار
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">تأكيد التسجيل</h4>
+                            <p>بعد التسجيل سيتم إضافتك إلى قائمة الطلاب وسيمكنك البدء في دراسة الكورس فوراً.</p>
+                            
+                            <form method="POST" action="{{ url_for('enroll', course_id=course.CourseID) }}">
+                                {{ form.hidden_tag() }}
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        <i class="fas fa-check-circle"></i> تأكيد التسجيل
+                                    </button>
+                                    <a href="{{ url_for('course_detail', course_id=course.CourseID) }}" 
+                                       class="btn btn-outline-secondary">
+                                        <i class="fas fa-times-circle"></i> إلغاء
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
