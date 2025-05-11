@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container mt-auto">
+    <form method="post" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="card-header">
+                <h3 class="text-center">Contact us</h3>
+            </div>
+            <div class="form-group">
+                {{ form.name.label(class='form-control-label') }}
+                {{ form.name(class='form-control form-control-med') }}
+                {% if form.name.errors %}
+                    {% for error in form.name.errors %}
+                        <span class="text-danger d-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class='form-control-label') }}
+                {{ form.email(class='form-control form-control-med') }}
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <span class="text-danger d-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.message.label(class='form-control-label') }}
+                {{ form.message(class='form-control form-control-med', rows=5) }}
+                {% if form.message.errors %}
+                    {% for error in form.message.errors %}
+                        <span class="text-danger d-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class='btn btn-dark') }}
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

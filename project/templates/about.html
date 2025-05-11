@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="mb-4 text-primary fw-bold">About Us</h1>
+            <p class="lead text-muted">
+                Welcome to our platform! We are dedicated to providing high-quality courses that empower learners
+                and instructors alike. Whether you're here to teach or to grow your skills, we aim to make your
+                journey smooth, accessible, and enjoyable.
+            </p>
+            <hr class="my-4">
+            <p>
+                This platform was built using Flask, Bootstrap, and a passion for education.  
+                If you have any questions or feedback, feel free to <a href="{{ url_for('contact') }}">reach out</a>!
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
